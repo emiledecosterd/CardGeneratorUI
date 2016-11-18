@@ -8,12 +8,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_Dialog(QtCore.QObject):
+class Ui_Dialog(QtWidgets.QWidget):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(398, 288)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
-        self.buttonBox.setGeometry(QtCore.QRect(30, 250, 341, 32))
+        self.buttonBox.setGeometry(QtCore.QRect(190, 250, 181, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
@@ -79,6 +79,9 @@ class Ui_Dialog(QtCore.QObject):
         self.comment_lineEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.comment_lineEdit.setObjectName("comment_lineEdit")
         self.gridLayout.addWidget(self.comment_lineEdit, 6, 1, 1, 1)
+        self.test = QtWidgets.QPushButton(Dialog)
+        self.test.setGeometry(QtCore.QRect(20, 250, 110, 32))
+        self.test.setObjectName("test")
 
         self.retranslateUi(Dialog)
         self.buttonBox.rejected.connect(Dialog.reject)
@@ -96,4 +99,5 @@ class Ui_Dialog(QtCore.QObject):
         self.questionLabel.setText(_translate("Dialog", "Libellé"))
         self.label_3.setText(_translate("Dialog", "Commentaire \n"
 " (optionnel)"))
+        self.test.setText(_translate("Dialog", "PushButton"))
 

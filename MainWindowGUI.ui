@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>392</width>
-    <height>607</height>
+    <height>678</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,10 +20,10 @@
       <x>10</x>
       <y>10</y>
       <width>371</width>
-      <height>551</height>
+      <height>631</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="60,45,5">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="60,45,0">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
@@ -43,14 +43,14 @@
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="0" column="0">
-          <widget class="QCheckBox" name="checkBox">
+          <widget class="QCheckBox" name="date_checkBox">
            <property name="text">
             <string>Date</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QCheckBox" name="checkBox_2">
+          <widget class="QCheckBox" name="period_checkBox">
            <property name="text">
             <string>Période</string>
            </property>
@@ -74,7 +74,7 @@
           <widget class="QDateEdit" name="dateEdit"/>
          </item>
          <item row="2" column="0">
-          <widget class="QCheckBox" name="checkBox_3">
+          <widget class="QCheckBox" name="section_checkBox">
            <property name="text">
             <string>Section</string>
            </property>
@@ -107,7 +107,7 @@
           <x>9</x>
           <y>129</y>
           <width>341</width>
-          <height>161</height>
+          <height>191</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
@@ -132,76 +132,15 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
-          <widget class="QSlider" name="horizontalSlider_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QSlider" name="horizontalSlider">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Santé</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_6">
-           <property name="font">
-            <font>
-             <italic>true</italic>
-            </font>
-           </property>
-           <property name="text">
-            <string>Range de sélection</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QSlider" name="horizontalSlider_3">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QSlider" name="horizontalSlider_4">
+         <item row="3" column="2">
+          <widget class="QSlider" name="financesMaxSlider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QSlider" name="horizontalSlider_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="2">
-          <widget class="QSlider" name="horizontalSlider_6">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QSlider" name="horizontalSlider_7">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QSlider" name="horizontalSlider_8">
+          <widget class="QSlider" name="financesMinSlider">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -217,6 +156,60 @@
            </property>
           </widget>
          </item>
+         <item row="4" column="1">
+          <widget class="QSlider" name="healthMinSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QSlider" name="healthMaxSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QSlider" name="academicsMaxSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="font">
+            <font>
+             <italic>true</italic>
+            </font>
+           </property>
+           <property name="text">
+            <string>Range de sélection</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QSlider" name="academicsMinSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QSlider" name="socialMaxSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Santé</string>
+           </property>
+          </widget>
+         </item>
          <item row="0" column="2">
           <widget class="QLabel" name="label_8">
            <property name="text">
@@ -226,6 +219,23 @@
             <set>Qt::AlignCenter</set>
            </property>
           </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSlider" name="socialMinSlider">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Tag</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1" colspan="2">
+          <widget class="QComboBox" name="tag_comboBox"/>
          </item>
         </layout>
        </widget>
@@ -252,14 +262,14 @@
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
          <item row="3" column="0">
-          <widget class="QCheckBox" name="checkBox_6">
+          <widget class="QCheckBox" name="answer2_checkBox">
            <property name="text">
             <string>Réponse 2</string>
            </property>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QCheckBox" name="checkBox_4">
+          <widget class="QCheckBox" name="imageName_checkBox">
            <property name="text">
             <string>Image</string>
            </property>
@@ -273,63 +283,63 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit">
+          <widget class="QLineEdit" name="imageName_lineEdit">
            <property name="placeholderText">
             <string>Entrer le nom de l'image</string>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="lineEdit_2">
+          <widget class="QLineEdit" name="question_lineEdit">
            <property name="placeholderText">
             <string>Posez votre question</string>
            </property>
           </widget>
          </item>
          <item row="4" column="0">
-          <widget class="QCheckBox" name="checkBox_7">
+          <widget class="QCheckBox" name="answer3_checkBox">
            <property name="text">
             <string>Réponse 3</string>
            </property>
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QCheckBox" name="checkBox_5">
+          <widget class="QCheckBox" name="answer1_checkBox">
            <property name="text">
             <string>Réponse 1</string>
            </property>
           </widget>
          </item>
          <item row="5" column="0">
-          <widget class="QCheckBox" name="checkBox_8">
+          <widget class="QCheckBox" name="answer4_checkBox">
            <property name="text">
             <string>Réponse 4</string>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="show1_button">
            <property name="text">
             <string>Afficher</string>
            </property>
           </widget>
          </item>
          <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="show2_button">
            <property name="text">
             <string>Afficher</string>
            </property>
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="show3_button">
            <property name="text">
             <string>Afficher</string>
            </property>
           </widget>
          </item>
          <item row="5" column="1">
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="show4_button">
            <property name="text">
             <string>Afficher</string>
            </property>
@@ -340,7 +350,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="send_pushButton">
+      <widget class="QPushButton" name="send_button">
        <property name="text">
         <string>Envoyer!</string>
        </property>

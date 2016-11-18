@@ -6,8 +6,16 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 # Custom classes
+from AnswersDialogGUI import Ui_Dialog
 from Answer import Answer
 
+'''
+/!\
+	MAKE GUI CLASS QWIDGET SUBCLASS!!! 
+	QtWidgets.QWidget
+	(otherwise signals won't work)
+/!\
+'''
 
 class AnswerDialog(Ui_Dialog):
 

@@ -1,3 +1,7 @@
+Dernières modifications:
+
+L'inteface de la fenêtre principale a été un peu retouchée
+
 Note pour le AnswerDialog:
 
 c'est pour décharger la fenêtre principale: l'utilisateur clique juste sur 'ajouter une réponse' et la boîte de dialogue s'affiche.
