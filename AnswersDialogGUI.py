@@ -79,9 +79,6 @@ class Ui_Dialog(QtWidgets.QWidget):
         self.comment_lineEdit = QtWidgets.QLineEdit(self.gridLayoutWidget)
         self.comment_lineEdit.setObjectName("comment_lineEdit")
         self.gridLayout.addWidget(self.comment_lineEdit, 6, 1, 1, 1)
-        self.test = QtWidgets.QPushButton(Dialog)
-        self.test.setGeometry(QtCore.QRect(20, 250, 110, 32))
-        self.test.setObjectName("test")
 
         self.retranslateUi(Dialog)
         self.buttonBox.rejected.connect(Dialog.reject)
@@ -99,5 +96,4 @@ class Ui_Dialog(QtWidgets.QWidget):
         self.questionLabel.setText(_translate("Dialog", "Libellé"))
         self.label_3.setText(_translate("Dialog", "Commentaire \n"
 " (optionnel)"))
-        self.test.setText(_translate("Dialog", "PushButton"))
 

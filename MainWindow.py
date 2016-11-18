@@ -27,7 +27,7 @@ class MainWindow(Ui_MainWindow):
 		Ui_MainWindow.__init__(self)
 		self.setupUi(window)
 		self.setup()
-		
+
 
 	def setup(self):
 
@@ -39,10 +39,41 @@ class MainWindow(Ui_MainWindow):
 		self.show4_button.clicked.connect(lambda: self.on_showAnswer(4))
 
 		# Desable everything with a checkbox
+		self.dateEdit.setEnabled(False)
+		self.period_comboBox.setEnabled(False)
+		self.section_comboBox.setEnabled(False)
+		self.imageName_lineEdit.setEnabled(False)
+		self.show1_button.setEnabled(False)
+		self.show2_button.setEnabled(False)
+		self.show3_button.setEnabled(False)
+		self.show4_button.setEnabled(False)
+
+		print('Setup')
 
 		# If a checkbox is checked, enable the corresponding field
+		self.date_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.dateEdit))
+		self.period_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.period_comboBox))
+		self.section_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.section_comboBox))
+		self.imageName_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.imageName_lineEdit))
+		self.answer1_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.show1_button))
+		self.answer2_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.show2_button))
+		self.answer3_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.show3_button))
+		self.answer4_checkBox.stateChanged.connect(
+			lambda: self.toggleEnabled(self.show4_button))
 
-		# Add a tooltip on sliders to diplay current value
+		# Setup the sliders
+
+
+
+	def toggleEnabled(self, widget):
+		widget.setEnabled(not widget.isEnabled())
 
 
 	def on_showAnswer(self, tag):
@@ -51,7 +82,7 @@ class MainWindow(Ui_MainWindow):
 		self.currentAnswer = tag
 
 		# Desactivate the window
-		self.enabled = False
+		self.setEnabled(False)
 
 		# Show the dialog to edit the answer
 		dialog = QDialog(self)
@@ -65,6 +96,8 @@ class MainWindow(Ui_MainWindow):
 		# Verify all the fields
 
 		# Send to Firebase
+
+		print('Send')
 
 
 	def updateAnswers(self, answer):

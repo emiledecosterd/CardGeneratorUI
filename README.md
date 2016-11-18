@@ -1,11 +1,11 @@
 ### Dernières modifications:
 
 L'inteface de la fenêtre principale a été un peu retouchée. 
-Dans le code, quelques méthodes ont été implémentées et des choses qui restent à faire ont été mises en commentaire.
+Dans le code, quelques méthodes ont été implémentées et des choses qui restent à faire ont été mises dans les commentaires.
 
 ### Known issues
 
-La connexion du bouton du dialogue ne fonctionne pas (je ne comprends pas pourquoi...)
+La connexion du bouton OK du dialogue ne fonctionne pas (je ne comprends pas pourquoi...)
 
 ### Note pour le AnswerDialog:
 

@@ -23,7 +23,10 @@
       <height>631</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="60,45,0">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="50,40,10">
+     <property name="spacing">
+      <number>20</number>
+     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
@@ -57,7 +60,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QComboBox" name="comboBox_2">
+          <widget class="QComboBox" name="period_comboBox">
            <item>
             <property name="text">
              <string>Semaine</string>
@@ -71,7 +74,49 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QDateEdit" name="dateEdit"/>
+          <widget class="QDateEdit" name="dateEdit">
+           <property name="date">
+            <date>
+             <year>2000</year>
+             <month>1</month>
+             <day>1</day>
+            </date>
+           </property>
+           <property name="time">
+            <time>
+             <hour>0</hour>
+             <minute>0</minute>
+             <second>0</second>
+            </time>
+           </property>
+           <property name="maximumDateTime">
+            <datetime>
+             <hour>23</hour>
+             <minute>59</minute>
+             <second>59</second>
+             <year>7917</year>
+             <month>6</month>
+             <day>30</day>
+            </datetime>
+           </property>
+           <property name="maximumDate">
+            <date>
+             <year>7917</year>
+             <month>6</month>
+             <day>30</day>
+            </date>
+           </property>
+           <property name="minimumDate">
+            <date>
+             <year>1816</year>
+             <month>9</month>
+             <day>14</day>
+            </date>
+           </property>
+           <property name="displayFormat">
+            <string>dd.MM.yyyy</string>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0">
           <widget class="QCheckBox" name="section_checkBox">
@@ -81,7 +126,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="section_comboBox">
            <item>
             <property name="text">
              <string>Meca</string>
