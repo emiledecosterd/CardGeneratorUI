@@ -29,9 +29,11 @@ class MainWindow(Ui_MainWindow):
 		self.setup()
 
 
+	# SETUP
+
 	def setup(self):
 
-		# Setup connections 
+		# Setup button connections 
 		self.send_button.clicked.connect(self.on_send)
 		self.show1_button.clicked.connect(lambda: self.on_showAnswer(1))
 		self.show2_button.clicked.connect(lambda: self.on_showAnswer(2))
@@ -47,8 +49,6 @@ class MainWindow(Ui_MainWindow):
 		self.show2_button.setEnabled(False)
 		self.show3_button.setEnabled(False)
 		self.show4_button.setEnabled(False)
-
-		print('Setup')
 
 		# If a checkbox is checked, enable the corresponding field
 		self.date_checkBox.stateChanged.connect(
@@ -69,12 +69,59 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.toggleEnabled(self.show4_button))
 
 		# Setup the sliders
+		self.academicsMinSlider.setRange(0,100)
+		self.academicsMaxSlider.setRange(0,100)
+		self.academicsMinSlider.setToolTip(str(self.academicsMaxSlider.value()))
+		self.academicsMaxSlider.setToolTip(str(self.academicsMaxSlider.value()))
+		self.academicsMinSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.academicsMinSlider))
+		self.academicsMaxSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.academicsMaxSlider))
+		self.socialMinSlider.setRange(0,100)
+		self.socialMaxSlider.setRange(0,100)
+		self.socialMinSlider.setToolTip(str(self.socialMinSlider.value()))
+		self.socialMaxSlider.setToolTip(str(self.socialMaxSlider.value()))
+		self.socialMinSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.socialMinSlider))
+		self.socialMaxSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.socialMaxSlider))
+		self.financesMinSlider.setRange(0,100)
+		self.financesMaxSlider.setRange(0,100)
+		self.financesMinSlider.setToolTip(str(self.financesMinSlider.value()))
+		self.financesMaxSlider.setToolTip(str(self.financesMaxSlider.value()))
+		self.financesMinSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.financesMinSlider))
+		self.financesMaxSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.financesMaxSlider))
+		self.healthMinSlider.setRange(0,100)
+		self.healthMaxSlider.setRange(0,100)
+		self.healthMinSlider.setToolTip(str(self.healthMinSlider.value()))
+		self.healthMaxSlider.setToolTip(str(self.healthMaxSlider.value()))
+		self.healthMinSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.healthMinSlider))
+		self.healthMaxSlider.valueChanged.connect(
+			lambda: self.setSliderToolTip(self.healthMaxSlider))
 
 
+	# HELPERS
 
 	def toggleEnabled(self, widget):
 		widget.setEnabled(not widget.isEnabled())
 
+
+	def setSliderToolTip(self, slider):
+		slider.setToolTip(str(slider.value()))
+
+
+	def updateAnswers(self, answer):
+
+		# Reactivate window
+		self.enabled = True
+
+		print('Updating answer')
+
+
+	# ACTIONS
 
 	def on_showAnswer(self, tag):
 
@@ -99,13 +146,6 @@ class MainWindow(Ui_MainWindow):
 
 		print('Send')
 
-
-	def updateAnswers(self, answer):
-
-		# Reactivate window
-		self.enabled = True
-
-		print('Updating answer')
 
 
 
