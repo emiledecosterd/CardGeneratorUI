@@ -7,6 +7,11 @@ Dans le code, quelques méthodes ont été implémentées et des choses qui rest
 
 La connexion du bouton OK du dialogue ne fonctionne pas (je ne comprends pas pourquoi...)
 
+### Reste à faire
+
+Tout ce qui touche aux tags
+Vérifier les données et les envoyer sur Firebase
+
 ### Note pour le AnswerDialog:
 
 C'est pour décharger la fenêtre principale: l'utilisateur clique juste sur 'ajouter une réponse' et la boîte de dialogue s'affiche.
