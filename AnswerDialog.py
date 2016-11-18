@@ -52,7 +52,7 @@ class AnswerDialog(Ui_Dialog):
 				commentText = None
 
 			changes = {
-				'academics' : self.AcademicsSlider.value,
+				'academics' : self.academicsSlider.value,
 				'social' : self.socialSlider.value,
 				'finances' : self.financesSlider.value,
 				'health' : self.healthSlider.value
