@@ -16,17 +16,11 @@ class Card(object):
 	def __init__(self, 
 				question, 
 				answers,
+				ranges, 
 				date = -1, 
 				period = -1, 
 				section = -1, 
-				ranges={
-							"academics" : [0, 100],
-							"social" : [0, 100],
-							"finances" : [0, 100],
-							"health" : [0, 100]
-						}, 
 				image="", 
-				comment="",
 				tag="",
 				suite=""):
 					
@@ -37,7 +31,6 @@ class Card(object):
 		self.answers = answers
 		self.image = image
 		self.question = question
-		self.comment = comment
 		self.tag = tag
 		self.suite = suite
 		

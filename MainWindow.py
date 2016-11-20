@@ -27,6 +27,7 @@ class MainWindow(Ui_MainWindow):
 	answers = [None, None, None, None]
 	mainWin = None
 	fb = None
+	startDate = QDate(2016, 9, 20)
 
 	def __init__(self, window):
 
@@ -185,9 +186,48 @@ class MainWindow(Ui_MainWindow):
 			messageBox.exec()
 			return
 			
-
+		date = -1
+		if self.date_checkBox.isChecked():
+			date = self.startDate.daysTo(self.dateEdit.date())
+			
+		period = -1
+		if self.period_checkBox.isChecked():
+			period = self.period_comboBox.currentIndex()
+			
+		section = -1
+		if self.section_checkBox.isChecked():
+			section = self.section_comboBox.currentIndex()
+			
+		ranges = {
+			"academics" : [self.academicsMinSlider.value(), self.academicsMaxSlider.value()],
+			"social" : [self.socialMinSlider.value(), self.socialMaxSlider.value()],
+			"finances" : [self.financesMinSlider.value(), self.financesMaxSlider.value()],
+			"health" : [self.healthMinSlider.value(), self.healthMaxSlider.value()]
+		}
+		
+		image = ""
+		if self.imageName_checkBox.isChecked():
+			image = self.imageName_lineEdit.text()
+			
+		tag = ""
+		if self.tag_comboBox.currentText() != "":
+			tag = self.tag_comboBox.currentText()
+			
+		suite = ""
+		if self.comboBox.currentIndex() > 0:
+			suite = self.comboBox.currentText()
+			
 		# Send to Firebase
-		card = Card(self.question_lineEdit.text(), self.answers)
+		card = Card(self.question_lineEdit.text(), 
+					self.answers,
+					ranges,
+					date,
+					period,
+					section,
+					image,
+					tag,
+					suite)
+					
 		#print(json.dumps(self.answers, default=lambda o: o.__dict__))
 		#print(card.toJSON())
 		auth = self.fb.auth()
