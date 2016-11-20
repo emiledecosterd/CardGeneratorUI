@@ -1,4 +1,5 @@
 import sys
+import json
 
 # Qt classes
 from PyQt5.QtCore import *
@@ -9,6 +10,7 @@ from PyQt5.QtWidgets import *
 from MainWindowGUI import Ui_MainWindow
 from Answer import Answer
 from AnswerDialog import AnswerDialog
+from Card import Card
 
 '''
 /!\
@@ -21,6 +23,7 @@ from AnswerDialog import AnswerDialog
 class MainWindow(Ui_MainWindow):
 
 	currentAnswer = None
+	answers = [None, None, None, None]
 	mainWin = None
 
 	def __init__(self, window):
@@ -36,10 +39,10 @@ class MainWindow(Ui_MainWindow):
 
 		# Setup button connections 
 		self.send_button.clicked.connect(self.on_send)
-		self.show1_button.clicked.connect(lambda: self.on_showAnswer(1))
-		self.show2_button.clicked.connect(lambda: self.on_showAnswer(2))
-		self.show3_button.clicked.connect(lambda: self.on_showAnswer(3))
-		self.show4_button.clicked.connect(lambda: self.on_showAnswer(4))
+		self.show1_button.clicked.connect(lambda: self.on_showAnswer(0))
+		self.show2_button.clicked.connect(lambda: self.on_showAnswer(1))
+		self.show3_button.clicked.connect(lambda: self.on_showAnswer(2))
+		self.show4_button.clicked.connect(lambda: self.on_showAnswer(3))
 
 		# Desable everything with a checkbox
 		self.dateEdit.setEnabled(False)
@@ -124,8 +127,8 @@ class MainWindow(Ui_MainWindow):
 	def updateAnswers(self, answer):
 		# Reactivate window
 		self.enabled = True
-
-		print('Updating answer')
+		self.answers[self.currentAnswer] = answer
+		print("Update done")
 
 	def linkSliders(self, minSlider, maxSlider):
 		minSlider.valueChanged.connect(
@@ -146,15 +149,24 @@ class MainWindow(Ui_MainWindow):
 
 		# Show the dialog to edit the answer
 		dialog = QDialog(parent=self.mainWin)
-		answerDialog = AnswerDialog(dialog, self.question_lineEdit.text())
+		answerDialog = AnswerDialog(dialog, self.question_lineEdit.text(), self.answers[tag])
 		answerDialog.completed.connect(self.updateAnswers)
 		dialog.exec()
 
 
 	def on_send(self):
-
+	
+		messageBox = QMessageBox()
+		
 		# Verify all the fields
+		if self.question_lineEdit.text() == "":
+			messageBox.setText('La question ne peut pas être vide!')
+			messageBox.exec()
+			return
+			
 
 		# Send to Firebase
-
+		card = Card(self.question_lineEdit.text(), self.answers)
+		#print(json.dumps(self.answers, default=lambda o: o.__dict__))
+		print(card.toJSON())
 		print('Send')

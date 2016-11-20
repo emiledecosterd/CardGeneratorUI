@@ -12,7 +12,7 @@ class Answer(object):
 
 	answer = ""
 	changes = {}
-	comment = None
+	comment = ""
 
 	def __init__(self, answer, changes, comment):
 		self.answer = answer
