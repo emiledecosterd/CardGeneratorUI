@@ -21,13 +21,14 @@ from AnswerDialog import AnswerDialog
 class MainWindow(Ui_MainWindow):
 
 	currentAnswer = None
+	mainWin = None
 
 	def __init__(self, window):
 
 		Ui_MainWindow.__init__(self)
 		self.setupUi(window)
 		self.setup()
-
+		mainWin = window
 
 	# SETUP
 
@@ -77,6 +78,7 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.academicsMinSlider))
 		self.academicsMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.academicsMaxSlider))
+            
 		self.socialMinSlider.setRange(0,100)
 		self.socialMaxSlider.setRange(0,100)
 		self.socialMinSlider.setToolTip(str(self.socialMinSlider.value()))
@@ -85,6 +87,7 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.socialMinSlider))
 		self.socialMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.socialMaxSlider))
+            
 		self.financesMinSlider.setRange(0,100)
 		self.financesMaxSlider.setRange(0,100)
 		self.financesMinSlider.setToolTip(str(self.financesMinSlider.value()))
@@ -93,6 +96,7 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.financesMinSlider))
 		self.financesMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.financesMaxSlider))
+            
 		self.healthMinSlider.setRange(0,100)
 		self.healthMaxSlider.setRange(0,100)
 		self.healthMinSlider.setToolTip(str(self.healthMinSlider.value()))
@@ -101,7 +105,11 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.healthMinSlider))
 		self.healthMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.healthMaxSlider))
-
+		
+		self.linkSliders(self.academicsMinSlider, self.academicsMaxSlider)
+		self.linkSliders(self.socialMinSlider, self.socialMaxSlider)
+		self.linkSliders(self.financesMinSlider, self.financesMaxSlider)
+		self.linkSliders(self.healthMinSlider, self.healthMaxSlider)
 
 	# HELPERS
 
@@ -114,12 +122,17 @@ class MainWindow(Ui_MainWindow):
 
 
 	def updateAnswers(self, answer):
-
 		# Reactivate window
 		self.enabled = True
 
 		print('Updating answer')
 
+	def linkSliders(self, minSlider, maxSlider):
+		minSlider.valueChanged.connect(
+			lambda: maxSlider.setSliderPosition(minSlider.value()) if minSlider.value() >= maxSlider.value() else None)
+		maxSlider.valueChanged.connect(
+			lambda: minSlider.setSliderPosition(maxSlider.value()) if minSlider.value() >= maxSlider.value() else None)
+        
 
 	# ACTIONS
 
@@ -129,13 +142,13 @@ class MainWindow(Ui_MainWindow):
 		self.currentAnswer = tag
 
 		# Desactivate the window
-		self.setEnabled(False)
+		self.enabled = False
 
 		# Show the dialog to edit the answer
-		dialog = QDialog(self)
+		dialog = QDialog(parent=self.mainWin)
 		answerDialog = AnswerDialog(dialog, self.question_lineEdit.text())
 		answerDialog.completed.connect(self.updateAnswers)
-		dialog.show()
+		dialog.exec()
 
 
 	def on_send(self):
@@ -145,9 +158,3 @@ class MainWindow(Ui_MainWindow):
 		# Send to Firebase
 
 		print('Send')
-
-
-
-
-
-
