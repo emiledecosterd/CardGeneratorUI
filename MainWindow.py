@@ -28,13 +28,10 @@ class MainWindow(Ui_MainWindow):
 	mainWin = None
 	fb = None
 	startDate = QDate(2016, 9, 20)
+	user = None
 
 	def __init__(self, window):
 
-		Ui_MainWindow.__init__(self)
-		self.setupUi(window)
-		self.setup()
-		mainWin = window
 		config = {
 		  "apiKey": "AIzaSyBUqtGx5JnZnLVclM-kRVhi-06jb1uBnOE",
 		  "authDomain": "epflsurvival-abd33.firebaseapp.com",
@@ -43,9 +40,26 @@ class MainWindow(Ui_MainWindow):
 		}
 
 		self.fb = pyrebase.initialize_app(config)
+		auth = self.fb.auth()
+		
+		Ui_MainWindow.__init__(self)
+		self.setupUi(window)
+		self.setup()
+		mainWin = window
+
+		# Log the user in
+		self.user = auth.sign_in_with_email_and_password('gui@survival.ch', 'Shd&5sdA_9(al')
 	# SETUP
 
 	def setup(self):
+		db = self.fb.database()
+		tags = db.child("tags").get()
+		self.comboBox.insertItem(0, "Aucune")
+		self.tag_comboBox.insertItem(0, "")
+		for t in tags.each():
+			self.comboBox.insertItem(0, t.val())
+			self.tag_comboBox.insertItem(0, t.val())
+			
 
 		# Setup button connections 
 		self.send_button.clicked.connect(self.on_send)
@@ -230,13 +244,9 @@ class MainWindow(Ui_MainWindow):
 					
 		#print(json.dumps(self.answers, default=lambda o: o.__dict__))
 		#print(card.toJSON())
-		auth = self.fb.auth()
-
-		# Log the user in
-		user = auth.sign_in_with_email_and_password('gui@survival.ch', 'Shd&5sdA_9(al')
 
 		db = self.fb.database()
-		r = db.child('cards').push(json.loads(card.toJSON()), user['idToken'])
+		r = db.child('cards').push(json.loads(card.toJSON()), self.user['idToken'])
 		print(r)
 		
 		if tag != "":
@@ -247,6 +257,6 @@ class MainWindow(Ui_MainWindow):
 					found = True
 				
 			if not found:
-				r = db.child('tags').push(tag, user['idToken'])
+				r = db.child('tags').push(tag, self.user['idToken'])
 			
 		print('Send')
