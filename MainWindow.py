@@ -238,4 +238,15 @@ class MainWindow(Ui_MainWindow):
 		db = self.fb.database()
 		r = db.child('cards').push(json.loads(card.toJSON()), user['idToken'])
 		print(r)
+		
+		if tag != "":
+			tags = db.child("tags").get()
+			found = False
+			for t in tags.each():
+				if t.val() == tag:
+					found = True
+				
+			if not found:
+				r = db.child('tags').push(tag, user['idToken'])
+			
 		print('Send')
