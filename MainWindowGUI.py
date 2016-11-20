@@ -8,7 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QtWidgets.QWidget):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(389, 650)
@@ -136,12 +136,19 @@ class Ui_MainWindow(object):
         self.label_9.setObjectName("label_9")
         self.gridLayout_2.addWidget(self.label_9, 5, 0, 1, 1)
         self.tag_comboBox = QtWidgets.QComboBox(self.gridLayoutWidget_2)
+        self.tag_comboBox.setEditable(True)
         self.tag_comboBox.setObjectName("tag_comboBox")
         self.gridLayout_2.addWidget(self.tag_comboBox, 5, 1, 1, 2)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem, 6, 0, 1, 1)
-        self.verticalLayout.addWidget(self.groupBox)
-        self.groupBox_2 = QtWidgets.QGroupBox(self.verticalLayoutWidget)
+        self.gridLayout_2.addItem(spacerItem, 7, 0, 1, 1)
+        self.label_10 = QtWidgets.QLabel(self.gridLayoutWidget_2)
+        self.label_10.setObjectName("label_10")
+        self.gridLayout_2.addWidget(self.label_10, 6, 0, 1, 1)
+        self.comboBox = QtWidgets.QComboBox(self.gridLayoutWidget_2)
+        self.comboBox.setObjectName("comboBox")
+        self.gridLayout_2.addWidget(self.comboBox, 6, 1, 1, 2)
+        self.groupBox_2 = QtWidgets.QGroupBox(self.groupBox)
+        self.groupBox_2.setGeometry(QtCore.QRect(0, 360, 369, 225))
         self.groupBox_2.setObjectName("groupBox_2")
         self.gridLayoutWidget_3 = QtWidgets.QWidget(self.groupBox_2)
         self.gridLayoutWidget_3.setGeometry(QtCore.QRect(9, 29, 341, 193))
@@ -185,15 +192,12 @@ class Ui_MainWindow(object):
         self.show4_button = QtWidgets.QPushButton(self.gridLayoutWidget_3)
         self.show4_button.setObjectName("show4_button")
         self.gridLayout_3.addWidget(self.show4_button, 5, 1, 1, 1)
-        self.verticalLayout.addWidget(self.groupBox_2)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout.addItem(spacerItem1)
+        self.verticalLayout.addWidget(self.groupBox)
         self.send_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.send_button.setObjectName("send_button")
         self.verticalLayout.addWidget(self.send_button)
         self.verticalLayout.setStretch(0, 50)
-        self.verticalLayout.setStretch(1, 40)
-        self.verticalLayout.setStretch(3, 10)
+        self.verticalLayout.setStretch(1, 10)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -220,6 +224,7 @@ class Ui_MainWindow(object):
         self.label_5.setText(_translate("MainWindow", "Santé"))
         self.label_8.setText(_translate("MainWindow", "Max"))
         self.label_9.setText(_translate("MainWindow", "Tag"))
+        self.label_10.setText(_translate("MainWindow", "Suite"))
         self.groupBox_2.setTitle(_translate("MainWindow", "Contenu de la carte"))
         self.answer2_checkBox.setText(_translate("MainWindow", "Réponse 2"))
         self.imageName_checkBox.setText(_translate("MainWindow", "Image"))

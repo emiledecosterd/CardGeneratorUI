@@ -1,4 +1,5 @@
 import sys
+import pyrebase
 import json
 
 # Qt classes
@@ -25,6 +26,7 @@ class MainWindow(Ui_MainWindow):
 	currentAnswer = None
 	answers = [None, None, None, None]
 	mainWin = None
+	fb = None
 
 	def __init__(self, window):
 
@@ -32,7 +34,14 @@ class MainWindow(Ui_MainWindow):
 		self.setupUi(window)
 		self.setup()
 		mainWin = window
+		config = {
+		  "apiKey": "AIzaSyBUqtGx5JnZnLVclM-kRVhi-06jb1uBnOE",
+		  "authDomain": "epflsurvival-abd33.firebaseapp.com",
+		  "storageBucket": "epflsurvival-abd33.appspot.com",
+		  "databaseURL": "https://epflsurvival-abd33.firebaseio.com/"
+		}
 
+		self.fb = pyrebase.initialize_app(config)
 	# SETUP
 
 	def setup(self):
@@ -157,10 +166,22 @@ class MainWindow(Ui_MainWindow):
 	def on_send(self):
 	
 		messageBox = QMessageBox()
+		errors = ""
 		
 		# Verify all the fields
 		if self.question_lineEdit.text() == "":
-			messageBox.setText('La question ne peut pas être vide!')
+			errors += '-> Il doit y avoir une question!' + '\n'
+			
+		c = 0
+		for a in self.answers:
+			if a == None:
+				c += 1
+				
+		if c > 2:
+			errors += '-> Il faut au moins 2 réponses!' + '\n'
+			
+		if errors != "":
+			messageBox.setText(errors)
 			messageBox.exec()
 			return
 			
@@ -168,5 +189,13 @@ class MainWindow(Ui_MainWindow):
 		# Send to Firebase
 		card = Card(self.question_lineEdit.text(), self.answers)
 		#print(json.dumps(self.answers, default=lambda o: o.__dict__))
-		print(card.toJSON())
+		#print(card.toJSON())
+		auth = self.fb.auth()
+
+		# Log the user in
+		user = auth.sign_in_with_email_and_password('gui@survival.ch', 'Shd&5sdA_9(al')
+
+		db = self.fb.database()
+		r = db.child('cards').push(json.loads(card.toJSON()), user['idToken'])
+		print(r)
 		print('Send')
