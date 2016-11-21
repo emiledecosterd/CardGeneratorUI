@@ -52,13 +52,7 @@ class MainWindow(Ui_MainWindow):
 	# SETUP
 
 	def setup(self):
-		db = self.fb.database()
-		tags = db.child("tags").get()
-		self.comboBox.insertItem(0, "Aucune")
-		self.tag_comboBox.insertItem(0, "")
-		for t in tags.each():
-			self.comboBox.insertItem(0, t.val())
-			self.tag_comboBox.insertItem(0, t.val())
+		self.fetchTags()
 			
 
 		# Setup button connections 
@@ -105,6 +99,10 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.academicsMinSlider))
 		self.academicsMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.academicsMaxSlider))
+		self.academicsMinSlider.valueChanged.connect(
+			lambda: self.acadMin.setText(str(self.academicsMinSlider.value())))
+		self.academicsMaxSlider.valueChanged.connect(
+			lambda: self.acadMax.setText(str(self.academicsMaxSlider.value())))
             
 		self.socialMinSlider.setRange(0,100)
 		self.socialMaxSlider.setRange(0,100)
@@ -114,6 +112,10 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.socialMinSlider))
 		self.socialMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.socialMaxSlider))
+		self.socialMinSlider.valueChanged.connect(
+			lambda: self.socialMin.setText(str(self.socialMinSlider.value())))
+		self.socialMaxSlider.valueChanged.connect(
+			lambda: self.socialMax.setText(str(self.socialMaxSlider.value())))
             
 		self.financesMinSlider.setRange(0,100)
 		self.financesMaxSlider.setRange(0,100)
@@ -123,6 +125,10 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.financesMinSlider))
 		self.financesMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.financesMaxSlider))
+		self.financesMinSlider.valueChanged.connect(
+			lambda: self.finMin.setText(str(self.financesMinSlider.value())))
+		self.financesMaxSlider.valueChanged.connect(
+			lambda: self.finMax.setText(str(self.financesMaxSlider.value())))
             
 		self.healthMinSlider.setRange(0,100)
 		self.healthMaxSlider.setRange(0,100)
@@ -132,6 +138,10 @@ class MainWindow(Ui_MainWindow):
 			lambda: self.setSliderToolTip(self.healthMinSlider))
 		self.healthMaxSlider.valueChanged.connect(
 			lambda: self.setSliderToolTip(self.healthMaxSlider))
+		self.healthMinSlider.valueChanged.connect(
+			lambda: self.healthMin.setText(str(self.healthMinSlider.value())))
+		self.healthMaxSlider.valueChanged.connect(
+			lambda: self.healthMax.setText(str(self.healthMaxSlider.value())))
 		
 		self.linkSliders(self.academicsMinSlider, self.academicsMaxSlider)
 		self.linkSliders(self.socialMinSlider, self.socialMaxSlider)
@@ -140,6 +150,22 @@ class MainWindow(Ui_MainWindow):
 
 	# HELPERS
 
+	def fetchTags(self):
+		db = self.fb.database()
+		tags = db.child("tags").get()
+		
+		self.comboBox.clear()
+		self.comboBox.insertItem(0, "")
+		self.tag_comboBox.clear()
+		self.tag_comboBox.insertItem(0, "")
+		
+		if tags.each() == None:
+			return
+			
+		for t in tags.each():
+			self.comboBox.insertItem(0, t.val())
+			self.tag_comboBox.insertItem(0, t.val())
+			
 	def toggleEnabled(self, widget):
 		widget.setEnabled(not widget.isEnabled())
 
@@ -247,16 +273,46 @@ class MainWindow(Ui_MainWindow):
 
 		db = self.fb.database()
 		r = db.child('cards').push(json.loads(card.toJSON()), self.user['idToken'])
-		print(r)
+		
+		if 'name' in r.keys():
+			self.statusLabel.setText("OK")
+		else:
+			self.statusLabel.setText("Une erreur est survenue")
+			
 		
 		if tag != "":
 			tags = db.child("tags").get()
 			found = False
-			for t in tags.each():
-				if t.val() == tag:
-					found = True
+			
+			if tags.each() != None:
+				for t in tags.each():
+					if t.val() == tag:
+						found = True
 				
 			if not found:
 				r = db.child('tags').push(tag, self.user['idToken'])
+				if not 'name' in r.keys():
+					self.statusLabel.setText("Une erreur est survenue (tag)")
+				
+		for i in range(4):
+			self.answers[i] = None
 			
-		print('Send')
+		self.answer1_checkBox.setChecked(False)
+		self.answer2_checkBox.setChecked(False)
+		self.answer3_checkBox.setChecked(False)
+		self.answer4_checkBox.setChecked(False)
+		
+		self.question_lineEdit.setText("")
+		self.comboBox.setCurrentIndex(0)
+		self.tag_comboBox.setCurrentIndex(0)
+		
+		self.academicsMinSlider.setValue(0)
+		self.academicsMaxSlider.setValue(0)
+		self.financesMinSlider.setValue(0)
+		self.financesMaxSlider.setValue(0)
+		self.healthMinSlider.setValue(0)
+		self.healthMaxSlider.setValue(0)
+		self.socialMinSlider.setValue(0)
+		self.socialMaxSlider.setValue(0)
+		
+		self.fetchTags()

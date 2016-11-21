@@ -38,13 +38,30 @@ class AnswerDialog(Ui_Dialog):
 			self.socialSlider.setValue(answer.changes['social'])
 			self.financesSlider.setValue(answer.changes['finances'])
 			self.healthSlider.setValue(answer.changes['health'])
-
+		
 		# Setup connections
 		self.buttonBox.accepted.connect(self.on_validate)
+
+		self.resetButton.clicked.connect(self.resetSliders)
+		
+		self.academicsSlider.valueChanged.connect(lambda:
+			self.labelSliderAca.setText(str(self.academicsSlider.value())))
+		self.socialSlider.valueChanged.connect(lambda:
+			self.labelSliderSoc.setText(str(self.socialSlider.value())))
+		self.financesSlider.valueChanged.connect(lambda:
+			self.labelSliderFin.setText(str(self.financesSlider.value())))
+		self.healthSlider.valueChanged.connect(lambda:
+			self.labelSliderHea.setText(str(self.healthSlider.value())))
 		
 		self.dialogRef = dialog
 
 
+	def resetSliders(self):
+			self.academicsSlider.setValue(0)
+			self.socialSlider.setValue(0)
+			self.financesSlider.setValue(0)
+			self.healthSlider.setValue(0)
+	
 	# Define min and max value for each gauge
 	def setupSliders(self):
 		max = 100
