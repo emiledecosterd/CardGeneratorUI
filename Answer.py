@@ -1,5 +1,3 @@
-import sys
-
 '''
 	This object represents an abstraction of a possible answer
 	to a question asked in the EPFLSurvival game

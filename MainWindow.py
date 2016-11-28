@@ -1,4 +1,3 @@
-import sys
 import pyrebase
 import json
 
@@ -93,6 +92,7 @@ class MainWindow(Ui_MainWindow):
 		# Setup the sliders
 		self.academicsMinSlider.setRange(0,100)
 		self.academicsMaxSlider.setRange(0,100)
+		self.academicsMaxSlider.setValue(100)
 		self.academicsMinSlider.setToolTip(str(self.academicsMaxSlider.value()))
 		self.academicsMaxSlider.setToolTip(str(self.academicsMaxSlider.value()))
 		self.academicsMinSlider.valueChanged.connect(
@@ -106,6 +106,7 @@ class MainWindow(Ui_MainWindow):
             
 		self.socialMinSlider.setRange(0,100)
 		self.socialMaxSlider.setRange(0,100)
+		self.socialMaxSlider.setValue(100)
 		self.socialMinSlider.setToolTip(str(self.socialMinSlider.value()))
 		self.socialMaxSlider.setToolTip(str(self.socialMaxSlider.value()))
 		self.socialMinSlider.valueChanged.connect(
@@ -119,6 +120,7 @@ class MainWindow(Ui_MainWindow):
             
 		self.financesMinSlider.setRange(0,100)
 		self.financesMaxSlider.setRange(0,100)
+		self.financesMaxSlider.setValue(100)
 		self.financesMinSlider.setToolTip(str(self.financesMinSlider.value()))
 		self.financesMaxSlider.setToolTip(str(self.financesMaxSlider.value()))
 		self.financesMinSlider.valueChanged.connect(
@@ -132,6 +134,7 @@ class MainWindow(Ui_MainWindow):
             
 		self.healthMinSlider.setRange(0,100)
 		self.healthMaxSlider.setRange(0,100)
+		self.healthMaxSlider.setValue(100)
 		self.healthMinSlider.setToolTip(str(self.healthMinSlider.value()))
 		self.healthMaxSlider.setToolTip(str(self.healthMaxSlider.value()))
 		self.healthMinSlider.valueChanged.connect(
@@ -307,12 +310,12 @@ class MainWindow(Ui_MainWindow):
 		self.tag_comboBox.setCurrentIndex(0)
 		
 		self.academicsMinSlider.setValue(0)
-		self.academicsMaxSlider.setValue(0)
+		self.academicsMaxSlider.setValue(100)
 		self.financesMinSlider.setValue(0)
-		self.financesMaxSlider.setValue(0)
+		self.financesMaxSlider.setValue(100)
 		self.healthMinSlider.setValue(0)
-		self.healthMaxSlider.setValue(0)
+		self.healthMaxSlider.setValue(100)
 		self.socialMinSlider.setValue(0)
-		self.socialMaxSlider.setValue(0)
+		self.socialMaxSlider.setValue(100)
 		
 		self.fetchTags()
