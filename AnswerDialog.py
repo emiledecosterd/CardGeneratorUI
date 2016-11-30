@@ -20,7 +20,7 @@ class AnswerDialog(Ui_Dialog):
 	completed = pyqtSignal(Answer)
 	dialogRef = None
 
-	def __init__(self, dialog, question, answer):
+	def __init__(self, dialog, question, answer, tags):
 
 		# Setup user interface
 		Ui_Dialog.__init__(self)
@@ -53,6 +53,14 @@ class AnswerDialog(Ui_Dialog):
 		
 		self.dialogRef = dialog
 
+		
+		self.suiteCombo.insertItem(0, "")
+		
+		if tags.each() == None:
+			return
+			
+		for t in tags.each():
+			self.suiteCombo.insertItem(0, t.val())
 
 	def resetSliders(self):
 			self.academicsSlider.setValue(0)
@@ -73,7 +81,6 @@ class AnswerDialog(Ui_Dialog):
 		self.financesSlider.setValue(0)
 		self.healthSlider.setRange(min, max)
 		self.healthSlider.setValue(0)
-
 
 	# The user pressed "ok", validate what he/she did
 	def on_validate(self):
@@ -96,7 +103,7 @@ class AnswerDialog(Ui_Dialog):
 			}
 
 			# Everything is ok, emit completed signal and dismiss the dialog
-			answer = Answer(answerText, changes, commentText)
+			answer = Answer(answerText, changes, commentText, self.suiteCombo.currentText())
 			self.completed.emit(answer)
 			self.dialogRef.accept()
 

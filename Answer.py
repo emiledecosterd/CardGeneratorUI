@@ -11,8 +11,10 @@ class Answer(object):
 	answer = ""
 	changes = {}
 	comment = ""
+	suite = ""
 
-	def __init__(self, answer, changes, comment):
+	def __init__(self, answer, changes, comment, suite):
 		self.answer = answer
 		self.changes = changes
 		self.commment = comment
+		self.suite = suite

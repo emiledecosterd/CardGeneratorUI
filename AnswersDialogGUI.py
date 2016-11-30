@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'AnswersDialogGUI.ui'
 #
-# Created by: PyQt5 UI code generator 5.6
+# Created by: PyQt5 UI code generator 5.7
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(QtWidgets.QWidget):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(398, 274)
+        Dialog.resize(398, 275)
         self.buttonBox = QtWidgets.QDialogButtonBox(Dialog)
         self.buttonBox.setGeometry(QtCore.QRect(210, 240, 181, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
@@ -99,6 +99,13 @@ class Ui_Dialog(QtWidgets.QWidget):
         self.resetButton.setSizePolicy(sizePolicy)
         self.resetButton.setObjectName("resetButton")
         self.gridLayout.addWidget(self.resetButton, 6, 2, 1, 1)
+        self.label_8 = QtWidgets.QLabel(self.gridLayoutWidget)
+        self.label_8.setObjectName("label_8")
+        self.gridLayout.addWidget(self.label_8, 7, 0, 1, 1)
+        self.suiteCombo = QtWidgets.QComboBox(self.gridLayoutWidget)
+        self.suiteCombo.setEditable(True)
+        self.suiteCombo.setObjectName("suiteCombo")
+        self.gridLayout.addWidget(self.suiteCombo, 7, 1, 1, 1)
 
         self.retranslateUi(Dialog)
         self.buttonBox.rejected.connect(Dialog.reject)
@@ -121,4 +128,5 @@ class Ui_Dialog(QtWidgets.QWidget):
         self.label_7.setText(_translate("Dialog", "Santé"))
         self.label_4.setText(_translate("Dialog", "Académique"))
         self.resetButton.setText(_translate("Dialog", "Reset"))
+        self.label_8.setText(_translate("Dialog", "Suite"))
 

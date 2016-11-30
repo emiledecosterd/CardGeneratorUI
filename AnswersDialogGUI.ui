@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>398</width>
-    <height>274</height>
+    <height>275</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -184,6 +184,20 @@
       </property>
       <property name="text">
        <string>Reset</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_8">
+      <property name="text">
+       <string>Suite</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QComboBox" name="suiteCombo">
+      <property name="editable">
+       <bool>true</bool>
       </property>
      </widget>
     </item>

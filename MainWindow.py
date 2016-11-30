@@ -51,7 +51,7 @@ class MainWindow(Ui_MainWindow):
 	# SETUP
 
 	def setup(self):
-		self.fetchTags()
+		self.fetchTags(self.tag_comboBox)
 			
 
 		# Setup button connections 
@@ -153,21 +153,18 @@ class MainWindow(Ui_MainWindow):
 
 	# HELPERS
 
-	def fetchTags(self):
+	def fetchTags(self, combo):
 		db = self.fb.database()
 		tags = db.child("tags").get()
 		
-		self.comboBox.clear()
-		self.comboBox.insertItem(0, "")
-		self.tag_comboBox.clear()
-		self.tag_comboBox.insertItem(0, "")
+		combo.clear()
+		combo.insertItem(0, "")
 		
 		if tags.each() == None:
 			return
 			
 		for t in tags.each():
-			self.comboBox.insertItem(0, t.val())
-			self.tag_comboBox.insertItem(0, t.val())
+			combo.insertItem(0, t.val())
 			
 	def toggleEnabled(self, widget):
 		widget.setEnabled(not widget.isEnabled())
@@ -200,9 +197,12 @@ class MainWindow(Ui_MainWindow):
 		# Desactivate the window
 		self.enabled = False
 
+		db = self.fb.database()
+		tags = db.child("tags").get()
+		
 		# Show the dialog to edit the answer
 		dialog = QDialog(parent=self.mainWin)
-		answerDialog = AnswerDialog(dialog, self.question_lineEdit.text(), self.answers[tag])
+		answerDialog = AnswerDialog(dialog, self.question_lineEdit.text(), self.answers[tag], tags)
 		answerDialog.completed.connect(self.updateAnswers)
 		dialog.exec()
 
@@ -256,10 +256,6 @@ class MainWindow(Ui_MainWindow):
 		if self.tag_comboBox.currentText() != "":
 			tag = self.tag_comboBox.currentText()
 			
-		suite = ""
-		if self.comboBox.currentIndex() > 0:
-			suite = self.comboBox.currentText()
-			
 		# Send to Firebase
 		card = Card(self.question_lineEdit.text(), 
 					self.answers,
@@ -268,8 +264,7 @@ class MainWindow(Ui_MainWindow):
 					period,
 					section,
 					image,
-					tag,
-					suite)
+					tag)
 					
 		#print(json.dumps(self.answers, default=lambda o: o.__dict__))
 		#print(card.toJSON())
@@ -306,7 +301,6 @@ class MainWindow(Ui_MainWindow):
 		self.answer4_checkBox.setChecked(False)
 		
 		self.question_lineEdit.setText("")
-		self.comboBox.setCurrentIndex(0)
 		self.tag_comboBox.setCurrentIndex(0)
 		
 		self.academicsMinSlider.setValue(0)
@@ -318,4 +312,4 @@ class MainWindow(Ui_MainWindow):
 		self.socialMinSlider.setValue(0)
 		self.socialMaxSlider.setValue(100)
 		
-		self.fetchTags()
+		self.fetchTags(self.tag_comboBox)

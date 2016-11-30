@@ -11,7 +11,6 @@ class Card(object):
 	question 	= None
 	comment 	= None
 	tag			= None
-	suite		= None
 
 	def __init__(self, 
 				question, 
@@ -21,8 +20,7 @@ class Card(object):
 				period = -1, 
 				section = -1, 
 				image="", 
-				tag="",
-				suite=""):
+				tag=""):
 					
 		self.date = date
 		self.period = period
@@ -32,7 +30,6 @@ class Card(object):
 		self.image = image
 		self.question = question
 		self.tag = tag
-		self.suite = suite
 		
 	def toJSON(self):
 		answersTemp = []
