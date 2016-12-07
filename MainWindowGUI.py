@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(520, 768)
+        MainWindow.resize(520, 538)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -46,12 +46,12 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.period_comboBox, 1, 1, 1, 1)
         self.dateEdit = QtWidgets.QDateEdit(self.centralwidget)
         self.dateEdit.setDateTime(QtCore.QDateTime(QtCore.QDate(2016, 9, 19), QtCore.QTime(0, 0, 0)))
-        self.dateEdit.setDate(QtCore.QDate(2016, 9, 19))
         self.dateEdit.setTime(QtCore.QTime(0, 0, 0))
         self.dateEdit.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(7917, 6, 30), QtCore.QTime(23, 59, 59)))
         self.dateEdit.setMaximumDate(QtCore.QDate(7917, 6, 30))
         self.dateEdit.setMinimumDate(QtCore.QDate(2016, 9, 19))
         self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setDate(QtCore.QDate(2016, 9, 19))
         self.dateEdit.setObjectName("dateEdit")
         self.gridLayout.addWidget(self.dateEdit, 0, 1, 1, 1)
         self.section_checkBox = QtWidgets.QCheckBox(self.centralwidget)
@@ -287,8 +287,9 @@ class Ui_MainWindow(object):
         self.statusLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.statusLabel.setObjectName("statusLabel")
         self.verticalLayout_2.addWidget(self.statusLabel)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem)
         self.verticalLayout.addLayout(self.verticalLayout_2)
-        self.send_button.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
