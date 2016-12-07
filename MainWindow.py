@@ -2,9 +2,7 @@ import pyrebase
 import json
 
 # Qt classes
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 # Custom classes
 from MainWindowGUI import Ui_MainWindow
@@ -26,7 +24,7 @@ class MainWindow(Ui_MainWindow):
 	answers = [None, None, None, None]
 	mainWin = None
 	fb = None
-	startDate = QDate(2016, 9, 20)
+	startDate = QtCore.QDate(2016, 9, 20)
 	user = None
 
 	def __init__(self, window):
@@ -201,7 +199,7 @@ class MainWindow(Ui_MainWindow):
 		tags = db.child("tags").get()
 		
 		# Show the dialog to edit the answer
-		dialog = QDialog(parent=self.mainWin)
+		dialog = QtWidgets.QDialog(parent=self.mainWin)
 		answerDialog = AnswerDialog(dialog, self.question_lineEdit.text(), self.answers[tag], tags)
 		answerDialog.completed.connect(self.updateAnswers)
 		dialog.exec()
@@ -209,7 +207,7 @@ class MainWindow(Ui_MainWindow):
 
 	def on_send(self):
 	
-		messageBox = QMessageBox()
+		messageBox = QtWidgets.QMessageBox()
 		errors = ""
 		
 		# Verify all the fields
