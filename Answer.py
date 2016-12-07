@@ -16,5 +16,5 @@ class Answer(object):
 	def __init__(self, answer, changes, comment, suite):
 		self.answer = answer
 		self.changes = changes
-		self.commment = comment
+		self.comment = comment
 		self.suite = suite
