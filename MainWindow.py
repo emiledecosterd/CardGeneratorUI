@@ -1,5 +1,6 @@
 import pyrebase
 import json
+import os
 
 # Qt classes
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -26,6 +27,8 @@ class MainWindow(Ui_MainWindow):
 	fb = None
 	startDate = QtCore.QDate(2016, 9, 20)
 	user = None
+	imagePath = None
+	storage = None
 
 	def __init__(self, window):
 
@@ -38,6 +41,7 @@ class MainWindow(Ui_MainWindow):
 
 		self.fb = pyrebase.initialize_app(config)
 		auth = self.fb.auth()
+		self.storage = self.fb.storage()
 		
 		Ui_MainWindow.__init__(self)
 		self.setupUi(window)
@@ -54,10 +58,13 @@ class MainWindow(Ui_MainWindow):
 
 		# Setup button connections 
 		self.send_button.clicked.connect(self.on_send)
+		
 		self.show1_button.clicked.connect(lambda: self.on_showAnswer(0))
 		self.show2_button.clicked.connect(lambda: self.on_showAnswer(1))
 		self.show3_button.clicked.connect(lambda: self.on_showAnswer(2))
 		self.show4_button.clicked.connect(lambda: self.on_showAnswer(3))
+		
+		self.browseButton.clicked.connect(self.on_browse)
 
 		# Desable everything with a checkbox
 		self.dateEdit.setEnabled(False)
@@ -185,7 +192,23 @@ class MainWindow(Ui_MainWindow):
 			lambda: minSlider.setSliderPosition(maxSlider.value()) if minSlider.value() >= maxSlider.value() else None)
         
 
+	def setImagePath(self, f):
+		#print("Image ", f, " ajoutée")
+		if(not f.endswith(('.jpeg', '.jpg', '.png', '.bmp', '.gif'))):
+			messageBox = QtWidgets.QMessageBox()
+			messageBox.setText("Format de l'image invalide.")
+			messageBox.exec()
+			return
+			
+			
+		self.imagePath = f
+		self.lineEdit.setText(f)
+		
 	# ACTIONS
+	def on_browse(self):
+		fileDial = QtWidgets.QFileDialog(self.mainWin)
+		fileDial.fileSelected.connect(self.setImagePath)
+		fileDial.exec()
 
 	def on_showAnswer(self, tag):
 
@@ -293,6 +316,7 @@ class MainWindow(Ui_MainWindow):
 		for i in range(4):
 			self.answers[i] = None
 			
+		#Reset interface
 		self.answer1_checkBox.setChecked(False)
 		self.answer2_checkBox.setChecked(False)
 		self.answer3_checkBox.setChecked(False)
@@ -311,3 +335,9 @@ class MainWindow(Ui_MainWindow):
 		self.socialMaxSlider.setValue(100)
 		
 		self.fetchTags(self.tag_comboBox)
+		
+		#Image upload
+		
+		if self.imageName_checkBox.isChecked() and self.imagePath != None:
+			self.storage.child("images/" + self.imageName_lineEdit.text()).put(self.imagePath, self.user['idToken'])
+				
