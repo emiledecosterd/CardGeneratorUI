@@ -44,12 +44,57 @@
        <widget class="QComboBox" name="period_comboBox">
         <item>
          <property name="text">
-          <string>Semaine</string>
+          <string>Début semestre 1</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Week-end</string>
+          <string>Milieu semestre 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fin semestre 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Révisions 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Examens 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Vacances</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Début semestre 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Milieu semestre 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Fin semestre 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Révisions 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Examens 2</string>
          </property>
         </item>
        </widget>
@@ -123,17 +168,67 @@
        <widget class="QComboBox" name="section_comboBox">
         <item>
          <property name="text">
-          <string>Meca</string>
+          <string>PH</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>IC</string>
+          <string>MA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SCGC</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>GM</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>MX</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>IN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SC</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>GC</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SIE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>AR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SV</string>
          </property>
         </item>
        </widget>
